@@ -114,6 +114,30 @@ body {
   color: var(--col-dark-grey);
 }
 
+@media (min-width: 1100px) {
+  .info-card {
+    width: 1000px;
+    top: 200px;
+  }
+  .info-card__list {
+    display: grid;
+    grid-template-columns: repeat(4, 220px);
+    width: 100%;
+  }
+  .info-card__list__item {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .info-card__list__item:not(.info-card__list__item:last-child) {
+    border-right: 1px solid #e0e0e0;
+  }
+  .info-card__list__item h2 {
+    text-align: left;
+  }
+}
+
 :root {
   --col-grey: #969696;
   --col-dark-grey: #2b2b2b;
