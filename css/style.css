@@ -15,23 +15,80 @@ body {
 }
 
 .background {
+  position: relative;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr 4fr;
+  grid-template-rows: 2.5fr 4fr;
 }
 
 .background__pattern {
   background-image: url("../../images/pattern-bg.png");
   background-size: cover;
   background-position: center;
+  display: flex;
+}
+
+.background__pattern h2 {
+  margin: 15px auto;
+  color: #fff;
+  font-weight: 500;
+}
+
+.background__pattern .form {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.background__pattern .form__input {
+  height: 35px;
+  width: 250px;
+  border: none;
+  padding: 20px;
+  color: var(--col-dark-grey);
+  border-radius: 8px 0 0 8px;
+}
+
+.background__pattern .form__input:focus {
+  outline: none;
+}
+
+.background__pattern .form__button {
+  width: 45px;
+  display: flex;
+  background-color: #000;
+  border: none;
+  border-radius: 0 8px 8px 0;
+}
+
+.background__pattern .form__button__icon {
+  margin: auto;
+  width: 12px;
+  height: 12px;
+}
+
+.background #map {
+  z-index: 9;
 }
 
 .info-card {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 22vh;
+  left: 50%;
+  z-index: 10;
+  transform: translateX(-50%);
   background-color: #fff;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  min-width: 300px;
+  padding: 20px 0;
+  border-radius: 10px;
+}
+
+.info-card__list {
+  width: 100%;
 }
 
 .info-card__list__item {
@@ -52,6 +109,8 @@ body {
 
 .info-card__list__item h2 {
   font-size: 18px;
+  width: 20ch;
+  text-align: center;
   color: var(--col-dark-grey);
 }
 
