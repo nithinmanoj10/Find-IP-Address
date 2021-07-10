@@ -18,7 +18,6 @@ const newMap = function (lat, lon) {
 
 // a function that updates the map
 const updateMap = function (lat, lng) {
-  console.log(map);
   map.panTo([lat, lng]);
 };
 
@@ -33,7 +32,6 @@ const updateView = function (ipAddress, location, timezone, isp, id) {
   elementLocation.innerHTML = location + ", " + id;
   elementTimezone.innerHTML = "UCT " + timezone;
   elementISP.innerHTML = isp;
-  console.log(elementIP, elementLocation, elementTimezone, elementISP);
 };
 
 // a function that gets the data
@@ -44,7 +42,6 @@ const displayIP = function (data) {
 
   newMap(lat, lng);
   updateView(ip, city, timezone, isp, geonameId);
-  console.log(data);
 };
 
 // a function that updates the IP info in view
@@ -60,10 +57,15 @@ const displayNewIP = function (data) {
 const getAPI = async function (URL) {
   try {
     const response = await fetch(URL);
-    const data = await response.json();
-    return data;
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      alert("Wrong IP Address Entered");
+    }
   } catch (err) {
-    console.log(err);
+    alert("Invalid IP Address");
   }
 };
 
