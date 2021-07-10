@@ -9,4 +9,17 @@
 body {
   font-family: "Rubik", sans-serif;
 }
+
+.background {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr 4fr;
+}
+
+.background__pattern {
+  background-image: url("../../images/pattern-bg.png");
+  background-size: cover;
+  background-position: center;
+}
 /*# sourceMappingURL=style.css.map */
