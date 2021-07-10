@@ -1,0 +1,27 @@
+.info-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  &__list {
+    &__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0;
+      &__name {
+        color: var(--col-grey);
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 10px;
+        letter-spacing: 1px;
+        margin-bottom: 3px;
+      }
+
+      h2 {
+        font-size: 18px;
+        color: var(--col-dark-grey);
+      }
+    }
+  }
+}

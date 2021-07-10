@@ -1,7 +1,10 @@
 console.log("Hello World");
 
+const URL =
+  "https://geo.ipify.org/api/v1?apiKey=at_PYGvqHqBThM53saBGsE7htlVh1VMn";
+
 const updateMap = function (lat, lon) {
-  const map = L.map("map").setView([lat, lon], 13);
+  const map = L.map("map").setView([lat, lon], 17);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
@@ -14,4 +17,13 @@ const updateMap = function (lat, lon) {
     .openPopup();
 };
 
-updateMap(11.9073719, 75.4799365);
+const getLocationAPI = async function () {
+  const response = await fetch(URL);
+  const data = await response.json();
+  const { lat, lng } = data.location;
+
+  updateMap(lat, lng);
+  console.log(lat, lng);
+};
+
+// getLocationAPI();
