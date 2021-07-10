@@ -23,7 +23,7 @@ body {
 }
 
 .background__pattern {
-  background-image: url("../../images/pattern-bg.png");
+  background-image: url("https://nithinmanoj10.github.io/Find-IP-Address/images/pattern-bg.png");
   background-size: cover;
   background-position: center;
   display: flex;
