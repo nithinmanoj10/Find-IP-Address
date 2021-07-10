@@ -2,9 +2,10 @@ const URL =
   "https://geo.ipify.org/api/v1?apiKey=at_PYGvqHqBThM53saBGsE7htlVh1VMn";
 
 let map;
-let data;
 
-const updateMap = function (lat, lon) {
+// a function that creates the map
+// shows the current location when the site is opened/refreshed
+const newMap = function (lat, lon) {
   map = new L.map("map", { zoomControl: false }).setView([lat, lon], 17);
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -15,6 +16,13 @@ const updateMap = function (lat, lon) {
   L.marker([lat, lon]).addTo(map).openPopup();
 };
 
+// a function that updates the map
+const updateMap = function (lat, lng) {
+  console.log(map);
+  map.panTo([lat, lng]);
+};
+
+// a function that updates and shows us the values
 const updateView = function (ipAddress, location, timezone, isp, id) {
   const elementIP = document.getElementById("ip-Address");
   const elementLocation = document.getElementById("location");
@@ -28,37 +36,55 @@ const updateView = function (ipAddress, location, timezone, isp, id) {
   console.log(elementIP, elementLocation, elementTimezone, elementISP);
 };
 
-const getLocationAPI = async function (URL) {
-  const response = await fetch(URL);
-  data = await response.json();
+// a function that gets the data
+// and passes it on to updateMap() and updateView()
+const displayIP = function (data) {
+  const { lat, lng, city, timezone, geonameId } = data.location;
+  const { ip, isp } = data;
+
+  newMap(lat, lng);
+  updateView(ip, city, timezone, isp, geonameId);
   console.log(data);
 };
 
-const displayIP = function (data) {
+// a function that updates the IP info in view
+const displayNewIP = function (data) {
   const { lat, lng, city, timezone, geonameId } = data.location;
   const { ip, isp } = data;
 
   updateMap(lat, lng);
   updateView(ip, city, timezone, isp, geonameId);
-  console.log(data);
 };
 
-const showIP = function () {
-  getLocationAPI(URL);
-  console.log(data);
+// a function that returns the object data as a JSON from the API
+const getAPI = async function (URL) {
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getData = async function (URL) {
+  const data = await getAPI(URL);
+
   displayIP(data);
 };
 
-showIP();
+const updateData = async function (URL) {
+  const data = await getAPI(URL);
+  displayNewIP(data);
+};
 
-// a function to get the value in the input box after entering the submit button
+getData(URL);
+
 const formButton = document.querySelector(".form__button");
 const formInput = document.getElementById("ip_input");
 
 formButton.addEventListener("click", function () {
   const newURL = URL + "&ipAddress=" + formInput.value;
-  map.flyTo([8.69, 77]);
+  formInput.value = "";
+  updateData(newURL);
 });
-
-console.log(formButton);
-console.log(formInput);
